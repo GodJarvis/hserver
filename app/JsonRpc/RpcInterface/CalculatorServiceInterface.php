@@ -6,7 +6,7 @@
  * Time: 11:38
  */
 
-namespace App\JsonRpc\Interface;
+namespace App\JsonRpc\RpcInterface;
 
 interface CalculatorServiceInterface
 {

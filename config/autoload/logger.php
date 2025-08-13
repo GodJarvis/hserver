@@ -12,9 +12,9 @@ declare(strict_types=1);
 return [
     'default' => [
         'handler' => [
-            'class' => Monolog\Handler\StreamHandler::class,
+            'class' => Monolog\Handler\RotatingFileHandler::class,
             'constructor' => [
-                'stream' => BASE_PATH . '/runtime/logs/hyperf.log',
+                'filename' => BASE_PATH . '/runtime/logs/hyperf.log',
                 'level' => Monolog\Logger::DEBUG,
             ],
         ],
@@ -24,6 +24,33 @@ return [
                 'format' => null,
                 'dateFormat' => 'Y-m-d H:i:s',
                 'allowInlineLineBreaks' => true,
+            ],
+        ],
+        'processors' => [
+            [
+                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+            ],
+        ],
+    ],
+    'http' => [
+        'handler' => [
+            'class' => App\Logger\Handler\HttpHandler::class,
+            'constructor' => [
+                'filename' => BASE_PATH . '/runtime/logs/http/hyperf.log',
+                'level' => Monolog\Logger::DEBUG,
+            ],
+        ],
+        'formatter' => [
+            'class' => Monolog\Formatter\LineFormatter::class,
+            'constructor' => [
+                'format' => null,
+                'dateFormat' => 'Y-m-d H:i:s',
+                'allowInlineLineBreaks' => true,
+            ],
+        ],
+        'processors' => [
+            [
+                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
             ],
         ],
     ],

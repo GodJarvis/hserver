@@ -10,9 +10,12 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
-class IndexController extends AbstractController
+use Hyperf\HttpServer\Annotation\AutoController;
+
+#[AutoController]
+class IndexController extends BaseController
 {
     public function index()
     {

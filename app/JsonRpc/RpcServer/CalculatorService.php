@@ -1,8 +1,8 @@
 <?php
 
-namespace App\JsonRpc;
+namespace App\JsonRpc\RpcServer;
 
-use App\JsonRpc\Interface\CalculatorServiceInterface;
+use App\JsonRpc\RpcInterface\CalculatorServiceInterface;
 use Hyperf\RpcServer\Annotation\RpcService;
 
 /**
