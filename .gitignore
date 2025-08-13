@@ -9,7 +9,7 @@
 runtime/
 vendor/
 .phpintel/
-.env
+.env.develop
 .DS_Store
 .phpunit*
 *.cache
