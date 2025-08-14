@@ -14,5 +14,8 @@ class LogGroup
 {
     public const string DEFAULT = 'default';
     public const string HTTP = 'http';
+    public const string JSON_RPC = 'json-rpc';
     public const string AMQP = 'amqp';
+    public const string COMMAND = 'command';
+    public const string KAFKA = 'kafka';
 }

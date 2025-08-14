@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * This file is part of Hyperf.
  *
@@ -9,21 +10,20 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
+
 return [
     App\Constants\LogGroup::DEFAULT => [
         'handler' => [
             'class' => Monolog\Handler\RotatingFileHandler::class,
             'constructor' => [
                 'filename' => BASE_PATH . '/runtime/logs/hyperf.log',
-                'level' => Monolog\Logger::DEBUG,
+                'level' => Monolog\Level::Debug,
             ],
         ],
         'formatter' => [
             'class' => Monolog\Formatter\LineFormatter::class,
             'constructor' => [
                 'format' => null,
-                'dateFormat' => 'Y-m-d H:i:s',
-                'allowInlineLineBreaks' => true,
             ],
         ],
         'processors' => [
@@ -36,16 +36,94 @@ return [
         'handler' => [
             'class' => App\Logger\Handler\HttpHandler::class,
             'constructor' => [
-                'filename' => BASE_PATH . '/runtime/logs/http/hyperf.log',
-                'level' => Monolog\Logger::DEBUG,
+                'filename' => BASE_PATH . '/runtime/logs/http/http.log',
+                'level' => Monolog\Level::Debug,
             ],
         ],
         'formatter' => [
             'class' => Monolog\Formatter\LineFormatter::class,
             'constructor' => [
                 'format' => null,
-                'dateFormat' => 'Y-m-d H:i:s',
-                'allowInlineLineBreaks' => true,
+            ],
+        ],
+        'processors' => [
+            [
+                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+            ],
+        ],
+    ],
+    App\Constants\LogGroup::JSON_RPC => [
+        'handler' => [
+            'class' => App\Logger\Handler\JsonRpcHandler::class,
+            'constructor' => [
+                'filename' => BASE_PATH . '/runtime/logs/json-rpc/service.log',
+                'level' => Monolog\Level::Debug,
+            ],
+        ],
+        'formatter' => [
+            'class' => Monolog\Formatter\LineFormatter::class,
+            'constructor' => [
+                'format' => null,
+            ],
+        ],
+        'processors' => [
+            [
+                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+            ],
+        ],
+    ],
+    App\Constants\LogGroup::AMQP => [
+        'handler' => [
+            'class' => Monolog\Handler\RotatingFileHandler::class,
+            'constructor' => [
+                'filename' => BASE_PATH . '/runtime/logs/amqp/amqp.log',
+                'level' => Monolog\Level::Debug,
+            ],
+        ],
+        'formatter' => [
+            'class' => Monolog\Formatter\LineFormatter::class,
+            'constructor' => [
+                'format' => null,
+            ],
+        ],
+        'processors' => [
+            [
+                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+            ],
+        ],
+    ],
+    App\Constants\LogGroup::COMMAND => [
+        'handler' => [
+            'class' => Monolog\Handler\RotatingFileHandler::class,
+            'constructor' => [
+                'filename' => BASE_PATH . '/runtime/logs/command/command.log',
+                'level' => Monolog\Level::Debug,
+            ],
+        ],
+        'formatter' => [
+            'class' => Monolog\Formatter\LineFormatter::class,
+            'constructor' => [
+                'format' => null,
+            ],
+        ],
+        'processors' => [
+            [
+                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+            ],
+        ],
+    ],
+    App\Constants\LogGroup::KAFKA => [
+        'handler' => [
+            'class' => Monolog\Handler\RotatingFileHandler::class,
+            'constructor' => [
+                'filename' => BASE_PATH . '/runtime/logs/kafka/kafka.log',
+                'level' => Monolog\Level::Debug,
+            ],
+        ],
+        'formatter' => [
+            'class' => Monolog\Formatter\LineFormatter::class,
+            'constructor' => [
+                'format' => null,
             ],
         ],
         'processors' => [

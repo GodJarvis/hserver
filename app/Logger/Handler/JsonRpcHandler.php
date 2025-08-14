@@ -12,13 +12,13 @@ namespace App\Logger\Handler;
 
 use Closure;
 use Hyperf\Context\ApplicationContext;
-use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Router\Dispatched;
+use Hyperf\Rpc\Contract\RequestInterface;
 use Hyperf\Stringable\Str;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Level;
 
-class HttpHandler extends RotatingFileHandler
+class JsonRpcHandler extends RotatingFileHandler
 {
     public function __construct(string $filename, int $maxFiles = 0, int|string|Level $level = Level::Debug, bool $bubble = true, ?int $filePermission = null, bool $useLocking = false, string $dateFormat = self::FILE_PER_DAY, string $filenameFormat = '{filename}-{date}')
     {
@@ -31,7 +31,7 @@ class HttpHandler extends RotatingFileHandler
                 [$controller, $action] = $this->prepareHandler($dispatched->handler->callback);
                 $controller = $this->getControllerPath($controller);
                 // 构建日志文件路径
-                $filename = BASE_PATH . '/runtime/logs/http/' . $controller . '/' . $action . '.log';
+                $filename = BASE_PATH . '/runtime/logs/json-rpc/' . $controller . '/' . $action . '.log';
             }
         }
         parent::__construct($filename, $maxFiles, $level, $bubble, $filePermission, $useLocking, $dateFormat, $filenameFormat);
