@@ -33,7 +33,6 @@ class LogAspect extends AbstractAspect
         Log::get()->info('切面切入前记录日志');
         $result = $proceedingJoinPoint->process();
         Log::get()->info('切面切入前记录日志');
-        $result['aspect_msg'] = '进入了切面';
         return $result;
     }
 }

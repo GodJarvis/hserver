@@ -13,10 +13,13 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Constants\ErrorCode;
+use App\Constants\LogGroup;
+use App\Logger\Context\LogGroupContext;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 abstract class AbstractController
 {
@@ -28,6 +31,13 @@ abstract class AbstractController
 
     #[Inject]
     protected ResponseInterface $response;
+
+    protected LoggerInterface $logger;
+
+    public function __construct()
+    {
+        LogGroupContext::set(LogGroup::HTTP);
+    }
 
     public function jsonReturn($data = [], int $code = ErrorCode::STATUS_OK, string $message = '', $extra = []): \Psr\Http\Message\ResponseInterface
     {

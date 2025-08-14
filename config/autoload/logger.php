@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 return [
-    'default' => [
+    App\Constants\LogGroup::DEFAULT => [
         'handler' => [
             'class' => Monolog\Handler\RotatingFileHandler::class,
             'constructor' => [
@@ -32,7 +32,7 @@ return [
             ],
         ],
     ],
-    'http' => [
+    App\Constants\LogGroup::HTTP => [
         'handler' => [
             'class' => App\Logger\Handler\HttpHandler::class,
             'constructor' => [

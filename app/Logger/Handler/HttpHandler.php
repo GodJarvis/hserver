@@ -16,12 +16,12 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Router\Dispatched;
 use Hyperf\Stringable\Str;
 use Monolog\Handler\RotatingFileHandler;
-use Monolog\Logger;
+use Monolog\Level;
 use Monolog\Utils;
 
 class HttpHandler extends RotatingFileHandler
 {
-    public function __construct(string $filename, int $maxFiles = 0, $level = Logger::DEBUG, bool $bubble = true, ?int $filePermission = null, bool $useLocking = false)
+    public function __construct(string $filename, int $maxFiles = 0, $level = Level::Debug, bool $bubble = true, ?int $filePermission = null, bool $useLocking = false)
     {
         parent::__construct($filename, $maxFiles, $level, $bubble, $filePermission, $useLocking);
 

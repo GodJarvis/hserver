@@ -14,13 +14,14 @@ use Hyperf\Context\ApplicationContext;
 use Hyperf\Context\Context;
 use Hyperf\Coroutine\Coroutine;
 use Hyperf\Snowflake\IdGeneratorInterface;
+use Monolog\LogRecord;
 use Monolog\Processor\ProcessorInterface;
 
 class AppendRequestIdProcessor implements ProcessorInterface
 {
     public const string REQUEST_ID = 'log.request.id';
 
-    public function __invoke($record)
+    public function __invoke(array|LogRecord $record)
     {
         $requestId = ApplicationContext::getContainer()->get(IdGeneratorInterface::class)->generate();
         $record['extra']['request_id'] = Context::getOrSet(self::REQUEST_ID, $requestId);

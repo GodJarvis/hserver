@@ -10,13 +10,17 @@ declare(strict_types=1);
 
 namespace App\Logger;
 
+use App\Logger\Context\LogGroupContext;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Logger\LoggerFactory;
 
 class Log
 {
-    public static function get(string $group = 'http'): \Psr\Log\LoggerInterface
+    public static function get(string $name = 'app', string $group = ''): \Psr\Log\LoggerInterface
     {
-        return ApplicationContext::getContainer()->get(LoggerFactory::class)->get($group, $group);
+        if (empty($group)) {
+            $group = LogGroupContext::get();
+        }
+        return ApplicationContext::getContainer()->get(LoggerFactory::class)->get($name, $group);
     }
 }
