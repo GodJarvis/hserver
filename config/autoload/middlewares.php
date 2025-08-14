@@ -15,4 +15,7 @@ return [
         \Hyperf\Validation\Middleware\ValidationMiddleware::class,
         App\Middleware\Http\AuthMiddleware::class,
     ],
+    'jsonrpc-http' => [
+        App\Middleware\JsonRpc\LogContextMiddleware::class,
+    ]
 ];
