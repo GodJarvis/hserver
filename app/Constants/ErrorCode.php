@@ -28,6 +28,6 @@ class ErrorCode extends AbstractConstants
     #[Message("Authentication Failed.")]
     public const int AUTHENTICATION_FAILED = -100;
 
-    #[Message("Server Error！")]
-    public const int SERVER_ERROR = 500;
+    #[Message("Validation Failed.")]
+    public const int VALIDATION_FAILED = -102;
 }

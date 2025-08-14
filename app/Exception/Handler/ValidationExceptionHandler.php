@@ -2,26 +2,28 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
- *
- * @link     https://www.hyperf.io
- * @document https://hyperf.wiki
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ * Created by : PhpStorm
+ * User: godjarvis
+ * Date: 2025/8/14
+ * Time: 11:20
  */
 
 namespace App\Exception\Handler;
 
+use App\Constants\ErrorCode;
+use App\Trait\HttpServerResponseFormatTrait;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\Annotation\ExceptionHandler as RegisterHandler;
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpMessage\Stream\SwooleStream;
+use Hyperf\Validation\ValidationException;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 #[RegisterHandler(server: 'http')]
-class AppExceptionHandler extends ExceptionHandler
+class ValidationExceptionHandler extends ExceptionHandler
 {
+    use HttpServerResponseFormatTrait;
+
     public function __construct(protected StdoutLoggerInterface $logger)
     {
     }
@@ -30,11 +32,13 @@ class AppExceptionHandler extends ExceptionHandler
     {
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());
-        return $response->withHeader('Server', 'Hyperf')->withStatus(500)->withBody(new SwooleStream('Internal Server Error.'));
+        $this->stopPropagation();
+        /** @var ValidationException $throwable */
+        return $this->jsonReturn($throwable->errors(), ErrorCode::VALIDATION_FAILED);
     }
 
     public function isValid(Throwable $throwable): bool
     {
-        return true;
+        return $throwable instanceof ValidationException;
     }
 }

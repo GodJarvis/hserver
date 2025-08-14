@@ -12,16 +12,20 @@ declare(strict_types=1);
 
 namespace App\Exception\Handler;
 
+use App\Constants\ErrorCode;
+use App\Exception\BusinessException;
+use App\Trait\HttpServerResponseFormatTrait;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\Annotation\ExceptionHandler as RegisterHandler;
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 #[RegisterHandler(server: 'http')]
-class AppExceptionHandler extends ExceptionHandler
+class BusinessExceptionHandler extends ExceptionHandler
 {
+    use HttpServerResponseFormatTrait;
+
     public function __construct(protected StdoutLoggerInterface $logger)
     {
     }
@@ -30,11 +34,11 @@ class AppExceptionHandler extends ExceptionHandler
     {
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());
-        return $response->withHeader('Server', 'Hyperf')->withStatus(500)->withBody(new SwooleStream('Internal Server Error.'));
+        return $this->jsonReturn([], ErrorCode::STATUS_FAILURE, $throwable->getMessage());
     }
 
     public function isValid(Throwable $throwable): bool
     {
-        return true;
+        return $throwable instanceof BusinessException;
     }
 }

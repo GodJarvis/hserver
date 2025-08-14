@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /**
  * This file is part of Hyperf.
  *
@@ -10,9 +9,9 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-return [
-    'http' => [
-        \Hyperf\Validation\Middleware\ValidationMiddleware::class,
-        App\Middleware\Http\AuthMiddleware::class,
-    ],
-];
+
+namespace App\Exception;
+
+class ValidationException extends \Hyperf\Validation\ValidationException
+{
+}

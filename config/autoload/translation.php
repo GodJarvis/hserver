@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /**
  * This file is part of Hyperf.
  *
@@ -11,8 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 return [
-    'http' => [
-        \Hyperf\Validation\Middleware\ValidationMiddleware::class,
-        App\Middleware\Http\AuthMiddleware::class,
-    ],
+    'locale' => 'zh_CN',
+    'fallback_locale' => 'en',
+    'path' => BASE_PATH . '/storage/languages',
 ];
