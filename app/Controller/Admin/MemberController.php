@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Event\MemberFoundEvent;
+use App\Logger\Log;
 use App\Repository\MySQL\MemberRepository;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
@@ -29,6 +30,7 @@ class MemberController extends BaseController
     {
         $id = $this->request->post('id', 1);
         $member = $this->memberRepository->getMemberById($id);
+        Log::get()->info('get member success:', ['member' => $member]);
         $this->eventDispatcher->dispatch(new MemberFoundEvent($member));
         return $this->jsonReturn($member);
     }

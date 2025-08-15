@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Logger\Log;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\Kafka\Producer;
@@ -24,7 +25,8 @@ class TestKafkaController extends BaseController
 
     public function publish()
     {
-        $this->producer->send('test_project_demo', 'value-' . time(), 'key' . time());
+        $this->producer->send('test_project_demo', $value = 'value-' . time(), 'key' . time());
+        Log::get()->info('publish message success:', ['message' => $value]);
         return $this->jsonReturn();
     }
 }

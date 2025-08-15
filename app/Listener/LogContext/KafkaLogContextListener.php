@@ -8,21 +8,22 @@ declare(strict_types=1);
  * Time: 16:41
  */
 
-namespace App\Listener;
+namespace App\Listener\LogContext;
 
 use App\Constants\LogGroup;
 use App\Logger\Context\LogGroupContext;
 use Hyperf\Command\Event\BeforeHandle;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
+use Hyperf\Kafka\Event\BeforeConsume;
 
 #[Listener]
-class CommandLogContextListener implements ListenerInterface
+class KafkaLogContextListener implements ListenerInterface
 {
     public function listen(): array
     {
         return [
-            BeforeHandle::class,
+            BeforeConsume::class,
         ];
     }
 
@@ -31,6 +32,6 @@ class CommandLogContextListener implements ListenerInterface
      */
     public function process(object $event): void
     {
-        LogGroupContext::set(LogGroup::COMMAND);
+        LogGroupContext::set(LogGroup::KAFKA);
     }
 }

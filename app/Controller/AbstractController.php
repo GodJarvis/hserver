@@ -18,7 +18,6 @@ use App\Trait\HttpServerResponseFormatTrait;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Psr\Container\ContainerInterface;
-use Psr\Log\LoggerInterface;
 
 abstract class AbstractController
 {
@@ -29,8 +28,6 @@ abstract class AbstractController
 
     #[Inject]
     protected RequestInterface $request;
-
-    protected LoggerInterface $logger;
 
     public function __construct()
     {

@@ -16,28 +16,42 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Router\Dispatched;
 use Hyperf\Stringable\Str;
 use Monolog\Handler\RotatingFileHandler;
-use Monolog\Level;
+use Monolog\LogRecord;
 
 class HttpHandler extends RotatingFileHandler
 {
-    public function __construct(string $filename, int $maxFiles = 0, int|string|Level $level = Level::Debug, bool $bubble = true, ?int $filePermission = null, bool $useLocking = false, string $dateFormat = self::FILE_PER_DAY, string $filenameFormat = '{filename}-{date}')
+    private function getHttpLogPath(): string
     {
-        $container = ApplicationContext::getContainer();
-        if ($container->has(RequestInterface::class)) {
-            $request = $container->get(RequestInterface::class);
-            /** @var Dispatched $dispatched */
-            $dispatched = $request->getAttribute(Dispatched::class);
-            if (!$dispatched->handler->callback instanceof Closure) {
-                [$controller, $action] = $this->prepareHandler($dispatched->handler->callback);
-                $controller = $this->getControllerPath($controller);
-                // 构建日志文件路径
-                $filename = BASE_PATH . '/runtime/logs/http/' . $controller . '/' . $action . '.log';
-            }
+        if (!ApplicationContext::hasContainer()) {
+            return '';
         }
-        parent::__construct($filename, $maxFiles, $level, $bubble, $filePermission, $useLocking, $dateFormat, $filenameFormat);
+        $container = ApplicationContext::getContainer();
+        if (!$container->has(RequestInterface::class)) {
+            return '';
+        }
+        $request = $container->get(RequestInterface::class);
+        /** @var Dispatched $dispatched */
+        $dispatched = $request->getAttribute(Dispatched::class);
+        if ($dispatched && !$dispatched->handler->callback instanceof Closure) {
+            [$controller, $action] = $this->prepareHandler($dispatched->handler->callback);
+            $controller = $this->getControllerPath($controller);
+            return BASE_PATH . '/runtime/logs/http/' . $controller . '/' . $action . '.log';
+        }
+        return '';
     }
 
-    protected function prepareHandler($handler): array
+    protected function write(LogRecord $record): void
+    {
+        $targetPath = $this->getHttpLogPath();
+        if ($targetPath && $this->url !== $targetPath) {
+            $this->url = $targetPath;
+            $this->close();
+        }
+
+        parent::write($record);
+    }
+
+    private function prepareHandler($handler): array
     {
         if (is_string($handler)) {
             if (str_contains($handler, '@')) {
@@ -51,7 +65,7 @@ class HttpHandler extends RotatingFileHandler
         throw new \RuntimeException('Handler not exist.');
     }
 
-    protected function getControllerPath(string $className): string
+    private function getControllerPath(string $className): string
     {
         $handledNamespace = Str::replaceFirst('Controller', '', Str::after($className, '\\Controller\\'));
         $handledNamespace = str_replace('\\', '/', $handledNamespace);

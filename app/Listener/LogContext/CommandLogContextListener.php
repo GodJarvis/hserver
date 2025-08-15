@@ -8,22 +8,21 @@ declare(strict_types=1);
  * Time: 16:41
  */
 
-namespace App\Listener;
+namespace App\Listener\LogContext;
 
 use App\Constants\LogGroup;
 use App\Logger\Context\LogGroupContext;
-use Hyperf\Amqp\Event\BeforeConsume;
 use Hyperf\Command\Event\BeforeHandle;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 
 #[Listener]
-class AmqpLogContextListener implements ListenerInterface
+class CommandLogContextListener implements ListenerInterface
 {
     public function listen(): array
     {
         return [
-            BeforeConsume::class,
+            BeforeHandle::class,
         ];
     }
 
@@ -32,6 +31,6 @@ class AmqpLogContextListener implements ListenerInterface
      */
     public function process(object $event): void
     {
-        LogGroupContext::set(LogGroup::AMQP);
+        LogGroupContext::set(LogGroup::COMMAND);
     }
 }

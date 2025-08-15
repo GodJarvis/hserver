@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Job\DemoJob;
+use App\Logger\Log;
 use Hyperf\AsyncQueue\Driver\DriverFactory;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
@@ -26,6 +27,7 @@ class TestAsyncQueueController extends BaseController
         $payload = ['name' => 'godjarvis'];
         $delay = 0;
         $this->driverFactory->get('default')->push(new DemoJob($payload), $delay);
+        Log::get()->info('push message success:', ['message' => $payload]);
         return $this->jsonReturn();
     }
 }

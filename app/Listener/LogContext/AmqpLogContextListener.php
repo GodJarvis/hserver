@@ -8,22 +8,22 @@ declare(strict_types=1);
  * Time: 16:41
  */
 
-namespace App\Listener;
+namespace App\Listener\LogContext;
 
 use App\Constants\LogGroup;
 use App\Logger\Context\LogGroupContext;
+use Hyperf\Amqp\Event\BeforeConsume;
 use Hyperf\Command\Event\BeforeHandle;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
-use Hyperf\Kafka\Event\BeforeLongLangConsumerCreated;
 
 #[Listener]
-class KafkaLogContextListener implements ListenerInterface
+class AmqpLogContextListener implements ListenerInterface
 {
     public function listen(): array
     {
         return [
-            BeforeLongLangConsumerCreated::class,
+            BeforeConsume::class,
         ];
     }
 
@@ -32,6 +32,6 @@ class KafkaLogContextListener implements ListenerInterface
      */
     public function process(object $event): void
     {
-        LogGroupContext::set(LogGroup::KAFKA);
+        LogGroupContext::set(LogGroup::AMQP);
     }
 }

@@ -12,8 +12,10 @@ namespace App\Listener;
 
 use App\Event\MemberFoundEvent;
 use App\Logger\Log;
+use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 
+#[Listener]
 class MemberFoundListener implements ListenerInterface
 {
     public function listen(): array

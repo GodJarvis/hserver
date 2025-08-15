@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Amqp\Producer\DemoProducer;
+use App\Logger\Log;
 use Hyperf\Amqp\Producer;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
@@ -25,6 +26,7 @@ class TestAmqpController extends BaseController
     {
         $message = new DemoProducer(['datetime' => date('Y-m-d H:i:s')]);
         $result = $this->producer->produce($message, true);
+        Log::get()->info('publish message success:', ['message' => $message]);
         return $this->jsonReturn($result);
     }
 }
