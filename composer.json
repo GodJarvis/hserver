@@ -25,7 +25,7 @@
         "hyperf/elasticsearch": "~3.1.0",
         "hyperf/engine": "^2.10",
         "hyperf/framework": "~3.1.0",
-        "hyperf/gotask": "dev-dependabot/composer/symfony/event-dispatcher-tw-6.3or-tw-7.0",
+        "hyperf/gotask": "^3.0",
         "hyperf/grpc-client": "~3.1.0",
         "hyperf/grpc-server": "~3.1.0",
         "hyperf/guzzle": "~3.1.0",
@@ -40,7 +40,8 @@
         "hyperf/rpc-server": "^3.1",
         "hyperf/snowflake": "^3.1",
         "hyperf/tracer": "~3.1.0",
-        "hyperf/validation": "^3.1"
+        "hyperf/validation": "^3.1",
+        "reasno/fastmongo": "dev-master"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",

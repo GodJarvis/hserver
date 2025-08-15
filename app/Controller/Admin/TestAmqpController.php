@@ -23,7 +23,7 @@ class TestAmqpController extends BaseController
 
     public function publish()
     {
-        $message = new DemoProducer(1);
+        $message = new DemoProducer(['datetime' => date('Y-m-d H:i:s')]);
         $result = $this->producer->produce($message, true);
         return $this->jsonReturn($result);
     }

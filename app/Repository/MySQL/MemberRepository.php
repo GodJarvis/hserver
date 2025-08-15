@@ -10,7 +10,16 @@ declare(strict_types=1);
 
 namespace App\Repository\MySQL;
 
+use App\Model\MySQL\Member;
+use Hyperf\Di\Annotation\Inject;
+
 class MemberRepository
 {
+    #[Inject]
+    public Member $member;
 
+    public function getMemberById(int $id): Member
+    {
+        return $this->member->newQuery()->where('id', '=', $id)->first();
+    }
 }

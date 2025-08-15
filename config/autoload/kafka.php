@@ -15,6 +15,7 @@ use Hyperf\Kafka\Constants\KafkaStrategy;
 use longlang\phpkafka\Client\SwooleClient;
 use longlang\phpkafka\Socket\SwooleSocket;
 use longlang\phpkafka\Timer\SwooleTimer;
+use function Hyperf\Support\env;
 
 return [
     'default' => [
@@ -24,11 +25,7 @@ return [
         'recv_timeout' => -1,
         'client_id' => '',
         'max_write_attempts' => 3,
-        'bootstrap_servers' => [
-            'alikafka-serverless-cn-fhh3zllq102-1000.alikafka.aliyuncs.com:9093',
-            'alikafka-serverless-cn-fhh3zllq102-2000.alikafka.aliyuncs.com:9093',
-            'alikafka-serverless-cn-fhh3zllq102-3000.alikafka.aliyuncs.com:9093'
-        ],
+        'bootstrap_servers' => env('KAFKA_BOOTSTRAP_SERVERS', '127.0.0.1:9092'),
         'acks' => -1,
         'producer_id' => -1,
         'producer_epoch' => -1,
