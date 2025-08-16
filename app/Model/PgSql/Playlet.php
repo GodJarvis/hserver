@@ -12,7 +12,5 @@ namespace App\Model\PgSql;
 
 class Playlet extends Model
 {
-    protected ?string $connection = 'pgsql';
-
     protected ?string $table = 'ods_mysql_zhangyu.playlet';
 }
