@@ -8,15 +8,16 @@ declare(strict_types=1);
  * Time: 09:45
  */
 
-namespace App\Logger\Context;
+namespace App\Utils\Logger\Context;
 
+use App\Constants\LogGroup;
 use Hyperf\Context\Context;
 
 class LogGroupContext
 {
     private const string LOG_REQUEST_GROUP = 'log.request.group';
 
-    public static function get(?int $coroutineId = null, string $default = 'default'): string
+    public static function get(?int $coroutineId = null, string $default = LogGroup::DEFAULT): string
     {
         return Context::get(self::LOG_REQUEST_GROUP, $default, $coroutineId);
     }

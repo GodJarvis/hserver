@@ -28,13 +28,13 @@ return [
         ],
         'processors' => [
             [
-                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+                'class' => \App\Utils\Logger\Processor\AppendRequestIdProcessor::class,
             ],
         ],
     ],
     App\Constants\LogGroup::HTTP => [
         'handler' => [
-            'class' => App\Logger\Handler\HttpHandler::class,
+            'class' => \App\Utils\Logger\Handler\HttpHandler::class,
             'constructor' => [
                 'filename' => BASE_PATH . '/runtime/logs/http/http.log',
                 'level' => Monolog\Level::Debug,
@@ -48,13 +48,13 @@ return [
         ],
         'processors' => [
             [
-                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+                'class' => \App\Utils\Logger\Processor\AppendRequestIdProcessor::class,
             ],
         ],
     ],
     App\Constants\LogGroup::JSON_RPC => [
         'handler' => [
-            'class' => App\Logger\Handler\JsonRpcHandler::class,
+            'class' => \App\Utils\Logger\Handler\JsonRpcHandler::class,
             'constructor' => [
                 'filename' => BASE_PATH . '/runtime/logs/json-rpc/service.log',
                 'level' => Monolog\Level::Debug,
@@ -68,7 +68,7 @@ return [
         ],
         'processors' => [
             [
-                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+                'class' => \App\Utils\Logger\Processor\AppendRequestIdProcessor::class,
             ],
         ],
     ],
@@ -88,7 +88,7 @@ return [
         ],
         'processors' => [
             [
-                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+                'class' => \App\Utils\Logger\Processor\AppendRequestIdProcessor::class,
             ],
         ],
     ],
@@ -108,7 +108,7 @@ return [
         ],
         'processors' => [
             [
-                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+                'class' => \App\Utils\Logger\Processor\AppendRequestIdProcessor::class,
             ],
         ],
     ],
@@ -128,7 +128,7 @@ return [
         ],
         'processors' => [
             [
-                'class' => App\Logger\Processor\AppendRequestIdProcessor::class,
+                'class' => \App\Utils\Logger\Processor\AppendRequestIdProcessor::class,
             ],
         ],
     ],

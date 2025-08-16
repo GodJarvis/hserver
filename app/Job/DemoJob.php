@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace App\Job;
 
-use App\Logger\Log;
+use App\Utils\Logger\Log;
 use Hyperf\AsyncQueue\Job;
 
 class DemoJob extends Job

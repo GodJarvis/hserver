@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Logger\Log;
+use App\Utils\Logger\Log;
 use Hyperf\HttpServer\Annotation\AutoController;
 
 #[AutoController]

@@ -8,19 +8,19 @@ declare(strict_types=1);
  * Time: 16:19
  */
 
-namespace App\Logger;
+namespace App\Utils\Logger;
 
-use App\Logger\Context\LogGroupContext;
+use App\Utils\Logger\Context\LogGroupContext;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Logger\LoggerFactory;
 
 class Log
 {
-    public static function get(string $name = 'app', string $group = ''): \Psr\Log\LoggerInterface
+    public static function get(string $group = ''): \Psr\Log\LoggerInterface
     {
         if (empty($group)) {
             $group = LogGroupContext::get();
         }
-        return ApplicationContext::getContainer()->get(LoggerFactory::class)->get($name, $group);
+        return ApplicationContext::getContainer()->get(LoggerFactory::class)->get($group, $group);
     }
 }

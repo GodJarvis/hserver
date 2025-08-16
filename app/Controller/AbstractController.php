@@ -13,8 +13,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Constants\LogGroup;
-use App\Logger\Context\LogGroupContext;
 use App\Trait\HttpServerResponseFormatTrait;
+use App\Utils\Logger\Context\LogGroupContext;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Psr\Container\ContainerInterface;

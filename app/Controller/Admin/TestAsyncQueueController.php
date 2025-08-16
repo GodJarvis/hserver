@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Job\DemoJob;
-use App\Logger\Log;
+use App\Utils\Logger\Log;
 use Hyperf\AsyncQueue\Driver\DriverFactory;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;

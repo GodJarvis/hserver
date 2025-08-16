@@ -3,7 +3,7 @@
 namespace App\JsonRpc\RpcServer;
 
 use App\JsonRpc\RpcInterface\CalculatorServiceInterface;
-use App\Logger\Log;
+use App\Utils\Logger\Log;
 use Hyperf\RpcServer\Annotation\RpcService;
 
 /**

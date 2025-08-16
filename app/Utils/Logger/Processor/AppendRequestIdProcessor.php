@@ -8,7 +8,7 @@ declare(strict_types=1);
  * Time: 16:22
  */
 
-namespace App\Logger\Processor;
+namespace App\Utils\Logger\Processor;
 
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Context\Context;

@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Event\MemberFoundEvent;
-use App\Logger\Log;
 use App\Repository\MySQL\MemberRepository;
+use App\Utils\Logger\Log;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Psr\EventDispatcher\EventDispatcherInterface;

@@ -8,7 +8,7 @@ declare(strict_types=1);
  * Time: 16:42
  */
 
-namespace App\Logger\Handler;
+namespace App\Utils\Logger\Handler;
 
 use Closure;
 use Hyperf\Context\ApplicationContext;

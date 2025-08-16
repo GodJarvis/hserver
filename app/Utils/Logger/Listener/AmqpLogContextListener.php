@@ -8,10 +8,10 @@ declare(strict_types=1);
  * Time: 16:41
  */
 
-namespace App\Listener\LogContext;
+namespace App\Utils\Logger\Listener;
 
 use App\Constants\LogGroup;
-use App\Logger\Context\LogGroupContext;
+use App\Utils\Logger\Context\LogGroupContext;
 use Hyperf\Amqp\Event\BeforeConsume;
 use Hyperf\Command\Event\BeforeHandle;
 use Hyperf\Event\Annotation\Listener;

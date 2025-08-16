@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Listener;
 
 use App\Event\MemberFoundEvent;
-use App\Logger\Log;
+use App\Utils\Logger\Log;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 

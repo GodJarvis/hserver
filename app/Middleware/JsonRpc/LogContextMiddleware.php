@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Middleware\JsonRpc;
 
 use App\Constants\LogGroup;
-use App\Logger\Context\LogGroupContext;
+use App\Utils\Logger\Context\LogGroupContext;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

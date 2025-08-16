@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Amqp\Producer\DemoProducer;
-use App\Logger\Log;
+use App\Utils\Logger\Log;
 use Hyperf\Amqp\Producer;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;

@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Aspect;
 
 use App\Controller\Admin\TestLogController;
-use App\Logger\Log;
+use App\Utils\Logger\Log;
 use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;

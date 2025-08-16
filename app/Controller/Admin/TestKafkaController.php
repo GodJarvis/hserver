@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Logger\Log;
+use App\Utils\Logger\Log;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\Kafka\Producer;

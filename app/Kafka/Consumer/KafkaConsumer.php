@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Kafka\Consumer;
 
-use App\Logger\Log;
+use App\Utils\Logger\Log;
 use Hyperf\Kafka\AbstractConsumer;
 use Hyperf\Kafka\Annotation\Consumer;
 use longlang\phpkafka\Consumer\ConsumeMessage;
